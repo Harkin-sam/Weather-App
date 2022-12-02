@@ -1,0 +1,21 @@
+
+
+.TopButtons{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 15px;
+    /* margin-bottom: 15px; */ 
+}
+
+.TopButtons button {
+    color: white;
+    background-color: inherit;
+    border:none;
+    padding: 10px;
+    font-weight: medium;
+    font-size: 16px;
+    line-height: 1.3rem;
+    font-family: 'Poppins', sans-serif;
+}
