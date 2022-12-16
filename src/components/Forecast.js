@@ -5,7 +5,7 @@ function Forecast(props) {
     <div className={classes.center}>
       <div className={classes.forecast}>
         <div className={classes.forecast__wrapper}>
-          <p className={classes.forecast__text}>hourly forecast</p>
+          <p className={classes.forecast__text}>{props.title}</p>
         </div>
         <hr className={classes.horizontal__line} />
 
