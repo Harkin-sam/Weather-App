@@ -1,54 +1,37 @@
 import React from "react";
-import classes from "./Forecast.module.css";
-function Forecast(props) {
+// import classes from "./Forecast.module.css";
+import { iconsUrlCode } from "../services/weatherService";
+
+
+
+function Forecast({ title, hoursList }) {
   return (
-    <div className={classes.center}>
-      <div className={classes.forecast}>
-        <div className={classes.forecast__wrapper}>
-          <p className={classes.forecast__text}>{props.title}</p>
+    <div className='center'>
+      <div className='forecast'>
+        <div className='forecast__wrapper'>
+          <p className='forecast__text'>{title}</p>
         </div>
-        <hr className={classes.horizontal__line} />
+        <hr className='horizontal__line' />
 
-        <div className={classes.forecast__details}>
-          <div className={classes.forecast__details__content}>
-            <p className={classes.forecast__details__item}>4:30PM</p>
+        <div className='forecast__details'>
+          {hoursList.map((hour) => {
+            return (
+              <div  key ={Math.random()}className='forecast__details__content'>
+                <p className='forecast__details__item'>{hour.title}</p>
 
-            <img src="https://openweathermap.org/img/wn/01d@2x.png" alt="" />
+                <img
+                  src={iconsUrlCode(hour.icon)}
+                  alt=""
+                />
 
-            <p className={classes.forecast__details__item2}>22°</p>
-          </div>
+                <p className='forecast__details__item2'>{`${hour.temp.toFixed()}°`}</p>
 
-          <div className={classes.forecast__details__content}>
-            <p className={classes.forecast__details__item}>4:30PM</p>
+                <p className='forecast__details__item'>{hour.cloudState}</p>
+              </div>
+            );
+          })}
 
-            <img src="https://openweathermap.org/img/wn/01d@2x.png" alt="" />
-
-            <p className={classes.forecast__details__item2}>22°</p>
-          </div>
-
-          <div className={classes.forecast__details__content}>
-            <p className={classes.forecast__details__item}>4:30PM</p>
-
-            <img src="https://openweathermap.org/img/wn/01d@2x.png" alt="" />
-
-            <p className={classes.forecast__details__item2}>22°</p>
-          </div>
-
-          <div className={classes.forecast__details__content}>
-            <p className={classes.forecast__details__item}>4:30PM</p>
-
-            <img src="https://openweathermap.org/img/wn/01d@2x.png" alt="" />
-
-            <p className={classes.forecast__details__item2}>22°</p>
-          </div>
-
-          <div className={classes.forecast__details__content}>
-            <p className={classes.forecast__details__item}>4:30PM</p>
-
-            <img src="https://openweathermap.org/img/wn/01d@2x.png" alt="" />
-
-            <p className={classes.forecast__details__item2}>22°</p>
-          </div>
+          
         </div>
       </div>
     </div>

@@ -1,17 +1,19 @@
 import React, { Fragment } from "react";
 import classes from "./TimeAndLocation.module.css";
 
-function TimeAndLocation() {
+import { formatToLocalTime } from "../services/weatherService";
+
+function TimeAndLocation({weather: {dt, timezone, name,  country }}) {
   return (
     <Fragment>
       <div className={classes.TimeLocation__container}>
         <p className={classes.TimeLocation__text}>
-          Thursday, 30 November 2022 | local time: 6:53 PM
+          {formatToLocalTime(dt, timezone)}
         </p>
       </div>
 
       <div className={classes.TimeLocation__city}>
-        <p className={classes.TimeLocation__cityName}>Berlin, DE</p>
+        <p className={classes.TimeLocation__cityName}>{`${name}, ${country}`}</p>
       </div>
     </Fragment>
   );
