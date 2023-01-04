@@ -1,4 +1,5 @@
 import "./App.css";
+import { useRef } from "react";
 import TopButtons from "./components/TopButtons";
 import Inputs from "./components/Inputs";
 import TimeAndLocation from "./components/TimeAndLocation";
@@ -16,6 +17,8 @@ function App() {
 
   const [weather, setWeather] = useState(null);
 
+  let cityBackgroundRef = useRef(null)
+
   useEffect(() => {
     const fetchWeather = async () => {
       const message = query.q ? query.q : "current location";
@@ -24,13 +27,12 @@ function App() {
 
       await getFormattedWeatherData({ ...query, units }).then((data) => {
         console.log(data);
-        
-          toast.success(
-            `Sucessfully fetched weather for ${data.name},  ${data.country}`
-          );
-        
+
+        toast.success(
+          `Sucessfully fetched weather for ${data.name},  ${data.country}`
+        );
+
         setWeather(data);
-        
       });
     };
 
@@ -63,25 +65,27 @@ function App() {
   };
 
   return (
-    <div className={`container ${formatBackground()}`}>
-      {weather && (
-        <Fragment>
-          <TopButtons onAddQuery={queryEnterHandler} />
-          <Inputs
-            onAddQuery={queryEnterHandler}
-            tempUnit={units}
-            setUnit={setUnits}
-          />
+    <div className="main-container" ref={cityBackgroundRef}>
+      <div className={`container ${formatBackground()}`}>
+        {weather && (
+          <Fragment>
+            <TopButtons onAddQuery={queryEnterHandler} forwardedRef={cityBackgroundRef}/>
+            <Inputs
+              onAddQuery={queryEnterHandler}
+              tempUnit={units}
+              setUnit={setUnits}
+            />
 
-          <TimeAndLocation weather={weather} />
-          <TemperatureAndDetails weather={weather} />
+            <TimeAndLocation weather={weather} />
+            <TemperatureAndDetails weather={weather} />
 
-          <Forecast title=" 3-hours forecast" hoursList={weather.hourly} />
-          {/* <Forecast title="daily forecast" /> */}
-        </Fragment>
-      )}
+            <Forecast title=" 3-hours forecast" hoursList={weather.hourly} />
+            {/* <Forecast title="daily forecast" /> */}
+          </Fragment>
+        )}
 
-      <ToastContainer autoClose={5000} theme="colored" newestOnTop={true} />
+        <ToastContainer autoClose={5000} theme="colored" newestOnTop={true} />
+      </div>
     </div>
   );
 }

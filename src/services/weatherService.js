@@ -2,7 +2,7 @@ import { DateTime } from "luxon";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const API_KEY = "";
+const API_KEY = "531c19483c8d7f0e9eff95f9e682f836";
 
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
 
@@ -23,6 +23,8 @@ const getWeatherData = (infoType, searchParams) => {
     .then((res) => res.json())
     .then((data) => data);
 };
+
+
 
 const formatCurrentWeather = (data) => {
   const {
@@ -95,6 +97,8 @@ const format3HoursForecast = (data) => {
 
   return { hourly };
 };
+
+
 
 const getFormattedWeatherData = async (searchParams) => {
   const formattedCurrentWeather = await getWeatherData(
@@ -197,12 +201,15 @@ export const formatToLocalTime = (
   return DateTime.fromSeconds(secs).setZone(label[0].id).toFormat(format);
 };
 
-//(UTC-(8*3600))/86400)
+
 
 // function for url icons
 export const iconsUrlCode = (code) =>
-  `http://openweathermap.org/img/wn/${code}@2x.png`;
+  `icons/${code}.svg`;
+
+
+  //GeoDB API for Auto complete
+
 
 export default getFormattedWeatherData;
 
-/// 'GMT':0, 'WAT':(-1*3600), 'AT': (-2*3600), 'NFT':(-3*3600-1800),'AST': (-4*3600), 'EST': (-5*3600),  'CST':(-6*3600),  'MST': (-7*3600),  'PST': (-8*3600),  'YST': (-9*3600),  'HST': (-10*3600),  'CAT': (-10*3600),  'NT' : (-11*3600),  'IDLW': (-12*3600),  'CET': (+1*3600), 'EET': (+2*3600),  'BT': (+3*3600),   'IT': (+3*3600+1800),  'ZP4': (+4*3600),  ('ZP5': +5*3600),  'IST': (+5*3600+1800),  'ZP6': (+6*3600),  'WAST': (+7*3600),  'JT' :(+7*3600+1800),  'CCT': (+8*3600), 'JST': (+9*3600), 'EAST': (+10*3600),  'NZT': (+12*3600)
