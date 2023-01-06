@@ -2,7 +2,7 @@ import { DateTime } from "luxon";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const API_KEY = "531c19483c8d7f0e9eff95f9e682f836";
+const API_KEY = "";
 
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
 
@@ -212,4 +212,6 @@ export const iconsUrlCode = (code) =>
 
 
 export default getFormattedWeatherData;
+
+
 
