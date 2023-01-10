@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-// import classes from "./Input.module.css";
+import React, { useRef, useState } from "react";
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
 import {
   UilSearch,
@@ -10,6 +10,10 @@ import { toast } from "react-toastify";
 
 function Inputs(props) {
   const inputRef = useRef();
+  const {transcript, resetTranscript} = useSpeechRecognition();
+  const [listening, setListening] = useState(false)
+
+  const micClasses = listening === true? "mic listening": "mic"
 
   const inputChangeHandler = (e) => {
     if (inputRef.current.value.trim() !== "") {
@@ -41,10 +45,28 @@ function Inputs(props) {
     }
   };
 
+
+  const startSpeechHandler = (e) =>{
+    e.preventDefault();
+    SpeechRecognition.startListening({continuous: true})
+    setListening(true)
+
+    console.log('listening Starts')
+
+    console.log(transcript)
+    
+  }
+
+  const stopSpeechHandler = () => {
+    SpeechRecognition.stopListening();
+    console.log('listening stops')
+    setListening(false)
+  }
+
   return (
     <div className="Input__wrapper">
       <div className="Input__section">
-        <button type="button" className="mic">
+        <button type="button" className={micClasses} onMouseDown={startSpeechHandler} onMouseUp={stopSpeechHandler} onMouseLeave={stopSpeechHandler}>
           <UilMicrophone size={19} />
         </button>
 
