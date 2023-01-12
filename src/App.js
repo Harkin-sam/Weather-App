@@ -84,7 +84,7 @@ function App() {
           <TemperatureAndDetails weather={weather} />
 
           <Forecast title=" 3-hours forecast" hoursList={weather.hourly} />
-          {/* <Forecast title="daily forecast" /> */}
+          
         </Fragment>
       )}
 
