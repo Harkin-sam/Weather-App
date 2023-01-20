@@ -2,7 +2,7 @@ import { DateTime } from "luxon";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const API_KEY ="531c19483c8d7f0e9eff95f9e682f836";
+const API_KEY ="";
 
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
 
@@ -17,7 +17,7 @@ const getWeatherData = (infoType, searchParams) => {
 
   url.search = new URLSearchParams({ ...searchParams, appid: API_KEY });
 
-  console.log(url);
+  // console.log(url);
 
   return fetch(url)
     .then((res) => res.json())
@@ -61,7 +61,7 @@ const formatCurrentWeather = (data) => {
   };
 };
 
-// gotta be paid
+// for 'One call' it gotta be paid
 
 // const formatDailyForecast = (data) => {
 //   let {
@@ -105,7 +105,7 @@ const getFormattedWeatherData = async (searchParams) => {
     "weather",
     searchParams
   ).then((data) => {
-    console.log(data);
+    // console.log(data);
 
     if (data.cod === "404") {
       toast.error(`${data.message}`);
@@ -116,24 +116,13 @@ const getFormattedWeatherData = async (searchParams) => {
 
   const { lat, lon } = formattedCurrentWeather;
 
-  // using the lon & lat to fetch the daily API, you gotta pay for this api
-  // const formattedForecastWeather = await getWeatherData("forecast/daily", {
-  //   lat,
-  //   lon,
-  //   cnt: 7,
-  //   units: searchParams.units,
-  // }).then((data) => {
-  //   console.log(data)
-  //   return formatDailyForecast(data);
-  // });
-
   // 3-hours forecast
   const formatted3hourly = await getWeatherData("forecast", {
     lat,
     lon,
     units: searchParams.units,
   }).then((data) => {
-    console.log(data);
+    // console.log(data);
 
     return format3HoursForecast(data);
   });
@@ -141,6 +130,8 @@ const getFormattedWeatherData = async (searchParams) => {
   return { ...formattedCurrentWeather, ...formatted3hourly };
 };
 
+
+//TIME
 // install Luxon in Terminal and the format in this function ns the Luxon standard format syntax
 
 // DateTime is imported from Luxon, we used fromSeconds because dt is in seconds
@@ -196,19 +187,19 @@ export const formatToLocalTime = (
   ];
 
   const label = timeZones.filter((i) => i.sec === zone);
-  console.log(label);
+  // console.log(label);
 
   return DateTime.fromSeconds(secs).setZone(label[0].id).toFormat(format);
 };
 
 
 
-// function for url icons
+// Function for url icons
 export const iconsUrlCode = (code) =>
   `icons/${code}.svg`;
 
 
-  //GeoDB API for Auto complete
+//GeoDB API for Auto complete later
 
 
 export default getFormattedWeatherData;

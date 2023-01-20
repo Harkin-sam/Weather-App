@@ -26,7 +26,7 @@ function Forecast({ title, hoursList }) {
 
                 <p className='forecast__details__item2'>{`${hour.temp.toFixed()}°`}</p>
 
-                <p className='forecast__details__item'>{hour.cloudState}</p>
+                <p className='forecast__details__item adjust'>{hour.cloudState}</p>
               </div>
             );
           })}

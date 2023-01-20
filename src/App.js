@@ -12,7 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 function App() {
-  const [query, setQuery] = useState({ q: "Lagos" });
+  const [query, setQuery] = useState({ q: "Lisbon" });
 
   const [units, setUnits] = useState("metric");
 
@@ -26,8 +26,8 @@ function App() {
       toast.info("fetching weather for " + message);
 
       await getFormattedWeatherData({ ...query, units }).then((data) => {
-        console.log(data);
-
+        // console.log(data);
+        
         toast.success(
           `Successfully fetched weather for ${data.name},  ${data.country}`
         );
@@ -65,6 +65,7 @@ function App() {
     }
   };
 
+
   return (
     <div className={`container ${formatBackground()}`}>
       {weather === null && <div className="loader"></div>}
@@ -88,7 +89,7 @@ function App() {
         </Fragment>
       )}
 
-      <ToastContainer autoClose={5000} theme="colored" newestOnTop={true} />
+      <ToastContainer autoClose={4000} theme="colored" newestOnTop={true} />
     </div>
   );
 }
